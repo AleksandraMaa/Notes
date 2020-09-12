@@ -13,9 +13,9 @@ library(shiny)
 
 ui <- fluidPage(
     selectInput(inputId = 'choice',
-                label = 'Choice',
-                choice = c('Hello','Goodbye'),
-                selected = c('Hello')
+                label = 'Pop Singers',
+                choice = c('American Pop','KPOP',"CPOP"),
+                selected = c('American Pop')
     ),
     
     textOutput('result')
@@ -28,17 +28,22 @@ server <- function(input,output,session)({
     text <- reactiveValues()
     
     observe({
-        if (input$choice == 'Hello') {
-            text$result <- 'Hello World'
+        if (input$choice == 'American Pop') {
+            text$result <- 'Taylor Swift\nSelena Gomez\nLady Gaga\nThe Weeknd'
         }
     })
     
     observe({
-        if (input$choice == 'Goodbye') {
-            text$result <- 'Goodbye World'
+        if (input$choice == 'KPOP') {
+            text$result <- 'Blackpink\nBTS\nEXO\nSuperM'
         }
     })
     
+    observe({
+        if (input$choice == 'CPOP') {
+            text$result <- 'Jay Chou\nJolin Tsai\nKUN\nTHE9'
+        }
+    })
     output$result <- renderText({
         text$result
     })
